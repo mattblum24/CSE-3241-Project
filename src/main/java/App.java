@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.HashMap;
 
 public class App {
     
@@ -81,6 +82,9 @@ public class App {
     };
 
     public static void main(String[] args) throws Exception {
+        HashMap<String, String> equipmentRepository = new HashMap<String, String>();
+        HashMap<String, String> droneRepository = new HashMap<String, String>();
+
         Scanner scan = new Scanner(System.in);
         System.out.println("Welcome to ___ Rentals!");
         System.out.println("Do you have an account? (yes or no)");
