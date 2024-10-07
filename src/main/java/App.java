@@ -1,10 +1,14 @@
 import java.util.Scanner;
+
+import entities.Drone;
+import entities.Equipment;
+
 import java.util.HashMap;
 
 public class App {
 
-    HashMap<String, String> equipmentRepository = new HashMap<String, String>();
-    HashMap<String, String> droneRepository = new HashMap<String, String>();
+    HashMap<String, Equipment> equipmentRepository = new HashMap<String, Equipment>();
+    HashMap<String, Drone> droneRepository = new HashMap<String, Drone>();
     
     // Runs the login menu
     public static void loginOrSignup(Scanner scan, String yesOrNo) {
@@ -90,7 +94,7 @@ public class App {
         System.out.println("Do you have an account? (yes or no)");
         String yesOrNo = scan.nextLine();
         loginOrSignup(scan, yesOrNo);
-        int menu = mainMenu(scan);        
+        int menu = mainMenu(scan);
         while(menu < 3) {
             switch (menu) {
                 case 1:
