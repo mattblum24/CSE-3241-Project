@@ -54,31 +54,21 @@ public class App {
 
     // previous orders menu
     public static void previousOrders(Scanner scan) {
-        System.out.println("Would you like to review? (yes or no)");
-        String review = scan.nextLine();
-        if(review == "yes") {
                System.out.println("Which order number would you like to leave a review for?");
                int orderNumber = scan.nextInt();
                String str = "Review for order %d: ";
                String strOutput = String.format(str, orderNumber);
                System.out.println(strOutput);
                String userReview = scan.nextLine();
-        }
-
-
     }
 
     // avaliable equipment menu
     public static void avaliableEquipment(Scanner scan) {
-        System.out.println("Would you like to rent a piece of equipment? (yes or no)");
-        String enter = scan.nextLine();
-        if(enter == "yes") {
-            System.out.println("Type in the serial number for piece of equipment you would like to rent: ");
-            int serialNumber = scan.nextInt();
-            if(serialNumber > 0) {
-                System.out.println("Thanks for your order! The estimated arrival is ______"); 
-            }
-        } 
+        System.out.println("Type in the serial number for piece of equipment you would like to rent: ");
+        int serialNumber = scan.nextInt();
+        if(serialNumber > 0) {
+            System.out.println("Thanks for your order! The estimated arrival is ______"); 
+        }
     };
 
     public static void main(String[] args) throws Exception {
@@ -92,19 +82,20 @@ public class App {
         loginOrSignup(scan, yesOrNo);
         int menu = mainMenu(scan);        
         while(menu < 3) {
-            switch (menu) {
-                case 1:
-                    previousOrders(scan);
-                    break;
-                
-                case 2:
-                    avaliableEquipment(scan);
-                    break;
-
-                default:
-                    break;
+            if(menu == 1) {
+                System.out.println("Would you like to review? (yes or no)");
+                String review = scan.nextLine();
+                if(review == "Yes") {
+                    previousOrders(scan); 
+                }
+            } else if(menu == 2) {
+                System.out.println("Would you like to rent a piece of equipment? (yes or no)");
+                String enter = scan.nextLine();
+                if(enter == "yes") {
+                    avaliableEquipment(scan); 
+                }
             }
-            menu = mainMenu(scan);
+            menu = mainMenu(scan); 
         }
         System.out.println("Thank you for visiting ___ rentals! Hope to see you again soon!");
         scan.close();
