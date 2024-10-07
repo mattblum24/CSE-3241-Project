@@ -60,13 +60,19 @@ public class App {
     }
 
     // previous orders menu
-    public static void previousOrders(Scanner scan) {
-               System.out.println("Which order number would you like to leave a review for?");
-               int orderNumber = scan.nextInt();
-               String str = "Review for order %d: ";
-               String strOutput = String.format(str, orderNumber);
-               System.out.println(strOutput);
-               String userReview = scan.nextLine();
+    public static void previousOrders() {
+        Scanner order = new Scanner(System.in); 
+        Scanner review = new Scanner(System.in);     
+        
+        System.out.println("Which order number would you like to leave a review for?");
+        int orderNumber = order.nextInt();
+        String str = "Review for order %d: ";
+        String strOutput = String.format(str, orderNumber);
+        System.out.println(strOutput);
+        String userReview = review.nextLine();
+
+        order.close();
+        review.close();
     }
 
     // avaliable equipment menu
@@ -87,17 +93,21 @@ public class App {
         int menu = mainMenu(scan);
         while(menu < 3) {
             if(menu == 1) {
+                Scanner reviewer = new Scanner(System.in);
                 System.out.println("Would you like to review? (yes or no)");
-                String review = scan.nextLine();
-                if(review == "Yes") {
-                    previousOrders(scan); 
+                String review = reviewer.nextLine();
+                if(review.equals("yes")) {;
+                    previousOrders(); 
                 }
+                reviewer.close();
             } else if(menu == 2) {
+                Scanner renter = new Scanner(System.in);
                 System.out.println("Would you like to rent a piece of equipment? (yes or no)");
-                String enter = scan.nextLine();
-                if(enter == "yes") {
-                    avaliableEquipment(scan); 
+                String enter = renter.nextLine();
+                if(enter.equals("yes")) {
+                    avaliableEquipment(renter); 
                 }
+                renter.close();
             }
             menu = mainMenu(scan); 
         }
