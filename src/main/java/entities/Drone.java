@@ -2,19 +2,19 @@ package entities;
 
 public class Drone {
     
+    String serialNumber;
+
     String name;
 
     String model;
 
-    String serialNumber;
-
     String status;
 
-    String location;
-    
     String year;
 
-    String weightCapacity;
+    String weight;
+
+    String capacity;
 
     String distanceAutonomy;
 
@@ -22,19 +22,29 @@ public class Drone {
 
     String warrantyExpiration;
 
-    public Drone(String name, String model, String serialNumber, String status, String location, String year, String weightCapacity, String distanceAutonomy, String maxSpeed, String warrantyExpiration) {
+    String warehousePhone;
+
+    String manufacturerPhone;
+    
+    String insurancePhone;
+
+    public Drone(String name, String model, String serialNumber, String status, String year, String weight, String capacity, String distanceAutonomy, String maxSpeed, String warrantyExpiration, String warehousePhone, String manufacturerPhone, String insurancePhone) {
         this.name = name;
         this.model = model;
         this.serialNumber = serialNumber;
         this.status = status;
-        this.location = location;
         this.year = year;
-        this.weightCapacity = weightCapacity;
+        this.weight = weight;
+        this.capacity = capacity;
         this.distanceAutonomy = distanceAutonomy;
         this.maxSpeed = maxSpeed;
         this.warrantyExpiration = warrantyExpiration;
+        this.warehousePhone = warehousePhone;
+        this.manufacturerPhone = manufacturerPhone;
+        this.insurancePhone = insurancePhone;
     }
 
+    // Name
     public String getName() {
         return name;
     }
@@ -43,6 +53,7 @@ public class Drone {
         this.name = name;
     }
 
+    // Model
     public String getModel() {
         return model;
     }
@@ -51,6 +62,7 @@ public class Drone {
         this.model = model;
     }
 
+    // Serial Number
     public String getSerialNumber() {
         return serialNumber;
     }
@@ -59,6 +71,7 @@ public class Drone {
         this.serialNumber = serialNumber;
     }
 
+    // Status
     public String getStatus() {
         return status;
     }
@@ -67,14 +80,7 @@ public class Drone {
         this.status = status;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
+    // Year
     public String getYear() {
         return year;
     }
@@ -83,14 +89,25 @@ public class Drone {
         this.year = year;
     }
 
-    public String getWeightCapacity() {
-        return weightCapacity;
+    // Weight
+    public String getWeight() {
+        return weight;
     }
 
-    public void setWeightCapacity(String weightCapacity) {
-        this.weightCapacity = weightCapacity;
+    public void setWeight(String weight) {
+        this.weight = weight;
     }
 
+    // Capacity
+    public String getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(String capacity) {
+        this.capacity = capacity;
+    }
+
+    // Distance Autonomy
     public String getDistanceAutonomy() {
         return distanceAutonomy;
     }
@@ -99,6 +116,7 @@ public class Drone {
         this.distanceAutonomy = distanceAutonomy;
     }
 
+    // Max Speed
     public String getMaxSpeed() {
         return maxSpeed;
     }
@@ -107,6 +125,7 @@ public class Drone {
         this.maxSpeed = maxSpeed;
     }
 
+    // Warranty Expiration
     public String getWarrantyExpiration() {
         return warrantyExpiration;
     }
@@ -115,4 +134,30 @@ public class Drone {
         this.warrantyExpiration = warrantyExpiration;
     }
 
+    // Warehouse Phone
+    public String getWarehousePhone() {
+        return warehousePhone;
+    }
+
+    public void setWarehousePhone(String warehousePhone) {
+        this.warehousePhone = warehousePhone;
+    }
+
+    // Manufacturer Phone
+    public String getManufacturerPhone() {
+        return manufacturerPhone;
+    }
+
+    public void setManufacturerPhone(String manufacturerPhone) {
+        this.manufacturerPhone = manufacturerPhone;
+    }
+
+    // Insurance Phone
+    public String getInsurancePhone() {
+        return insurancePhone;
+    }
+
+    public void setInsurancePhone(String insurancePhone) {
+        this.insurancePhone = insurancePhone;
+    }
 }

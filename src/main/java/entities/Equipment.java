@@ -1,18 +1,18 @@
 package entities;
 
 public class Equipment {
-    
-    String description;
-
-    String type;
-    
-    String model;
 
     String serialNumber;
 
-    String status;
+    String description;
 
-    String location;
+    String type;
+
+    String model;
+
+    String year;
+
+    String status;
 
     String warrantyExpiration;
 
@@ -20,18 +20,27 @@ public class Equipment {
 
     String dimensions;
 
-    public Equipment(String description, String type, String model, String serialNumber, String status, String location, String warrantyExpiration, String weight, String dimensions) {
+    String warehousePhone;
+
+    String manufacturerPhone;
+    
+    String insurancePhone;
+
+    public Equipment(String description, String type, String model, String serialNumber, String status, String location, String warrantyExpiration, String weight, String dimensions, String warehousePhone, String manufacturerPhone, String insurancePhone) {
         this.description = description;
         this.type = type;
         this.model = model;
         this.serialNumber = serialNumber;
         this.status = status;
-        this.location = location;
         this.warrantyExpiration = warrantyExpiration;
         this.weight = weight;
         this.dimensions = dimensions;
+        this.warehousePhone = warehousePhone;
+        this.manufacturerPhone = manufacturerPhone;
+        this.insurancePhone = insurancePhone;
     }
 
+    // Description
     public String getDescription() {
         return description;
     }
@@ -40,6 +49,7 @@ public class Equipment {
         this.description = description;
     }
 
+    // Type
     public String getType() {
         return type;
     }
@@ -48,6 +58,7 @@ public class Equipment {
         this.type = type;
     }
 
+    // Model
     public String getModel() {
         return model;
     }
@@ -56,6 +67,7 @@ public class Equipment {
         this.model = model;
     }
 
+    // Serial Number
     public String getSerialNumber() {
         return serialNumber;
     }
@@ -64,6 +76,16 @@ public class Equipment {
         this.serialNumber = serialNumber;
     }
 
+    // Year
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    // Status
     public String getStatus() {
         return status;
     }
@@ -72,14 +94,7 @@ public class Equipment {
         this.status = status;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
+    // Warranty Expiration
     public String getWarrantyExpiration() {
         return warrantyExpiration;
     }
@@ -88,6 +103,7 @@ public class Equipment {
         this.warrantyExpiration = warrantyExpiration;
     }
 
+    // Weight
     public String getWeight() {
         return weight;
     }
@@ -96,6 +112,7 @@ public class Equipment {
         this.weight = weight;
     }
 
+    // Dimensions
     public String getDimensions() {
         return dimensions;
     }
@@ -104,4 +121,30 @@ public class Equipment {
         this.dimensions = dimensions;
     }
 
+    // Warehouse Phone
+    public String getWarehousePhone() {
+        return warehousePhone;
+    }
+
+    public void setWarehousePhone(String warehousePhone) {
+        this.warehousePhone = warehousePhone;
+    }
+
+    // Manufacturer Phone
+    public String getManufacturerPhone() {
+        return manufacturerPhone;
+    }
+
+    public void setManufacturerPhone(String manufacturerPhone) {
+        this.manufacturerPhone = manufacturerPhone;
+    }
+
+    // Insurance Phone
+    public String getInsurancePhone() {
+        return insurancePhone;
+    }
+
+    public void setInsurancePhone(String insurancePhone) {
+        this.insurancePhone = insurancePhone;
+    }
 }
