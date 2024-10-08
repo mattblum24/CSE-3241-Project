@@ -65,19 +65,19 @@ public class App {
     }
 
     public static void assignDroneToDelivery(String customerId, Scanner scan) {
-        String droneId = stringPromptFromConsole("Drone ID: ", scan);
+        String droneId = stringPromptFromConsole("Drone Serial Number: ", scan);
         // TODO: Check for valid droneId and assign to rental in database for customer
         System.out.println("Drone assigned to delivery successfully");
     }
 
     public static void assignDroneToPickup(String customerId, Scanner scan) {
-        String droneId = stringPromptFromConsole("Drone ID: ", scan);
+        String droneId = stringPromptFromConsole("Drone Serial Number: ", scan);
         // TODO: What do we do with this? There is nothing in the schema corresponding to this
         System.out.println("Drone assigned to pickup successfully");
     }
 
     public static void equipmentMenu(Scanner scan) {
-        int menuSelection = intPromptFromConsole("1: Add equipment\n2: Remove equipment\n3: List equipment", scan);
+        int menuSelection = intPromptFromConsole("1: Add equipment\n2: Remove equipment\n3: List equipment\n4: Search equipment", scan);
         switch (menuSelection) {
             case 1:
                 addEquipment(scan);
@@ -87,6 +87,9 @@ public class App {
                 break;
             case 3:
                 listEquipment();
+                break;
+            case 4:
+                searchEquipment(scan);
                 break;
             default:
                 break;
@@ -126,8 +129,24 @@ public class App {
         }
     }
 
+    public static void searchEquipment(Scanner scan) {
+        String serialNumber = stringPromptFromConsole("Serial number: ", scan);
+        Equipment equipment = equipmentRepository.get(serialNumber);
+        System.out.println("Description: " + equipment.getDescription());
+        System.out.println("Type: " + equipment.getType());
+        System.out.println("Model: " + equipment.getModel());
+        System.out.println("Year: " + equipment.getYear());
+        System.out.println("Status: " + equipment.getStatus());
+        System.out.println("Warranty expiration: " + equipment.getWarrantyExpiration());
+        System.out.println("Weight: " + equipment.getWeight());
+        System.out.println("Dimensions: " + equipment.getDimensions());
+        System.out.println("Warehouse phone: " + equipment.getWarehousePhone());
+        System.out.println("Manufacturer phone: " + equipment.getManufacturerPhone());
+        System.out.println("Insurance phone: " + equipment.getInsurancePhone());
+    }
+
     public static void droneMenu(Scanner scan) {
-        int menuSelection = intPromptFromConsole("1: Add drone\n2: Remove drone\n3: List drones", scan);
+        int menuSelection = intPromptFromConsole("1: Add drone\n2: Remove drone\n3: List drones\n4: Search drones", scan);
         switch (menuSelection) {
             case 1:
                 addDrone(scan);
@@ -137,6 +156,9 @@ public class App {
                 break;
             case 3:
                 listDrones();
+                break;
+            case 4:
+                searchDrones(scan);
                 break;
             default:
                 break;
@@ -177,6 +199,23 @@ public class App {
         }
     }
 
+    public static void searchDrones(Scanner scan) {
+        String serialNumber = stringPromptFromConsole("Serial number: ", scan);
+        Drone drone = droneRepository.get(serialNumber);
+        System.out.println("Name: " + drone.getName());
+        System.out.println("Model: " + drone.getModel());
+        System.out.println("Status: " + drone.getStatus());
+        System.out.println("Year: " + drone.getYear());
+        System.out.println("Weight: " + drone.getWeight());
+        System.out.println("Capacity: " + drone.getCapacity());
+        System.out.println("Distance autonomy: " + drone.getDistanceAutonomy());
+        System.out.println("Max speed: " + drone.getMaxSpeed());
+        System.out.println("Warranty expiration: " + drone.getWarrantyExpiration());
+        System.out.println("Warehouse phone: " + drone.getWarehousePhone());
+        System.out.println("Manufacturer phone: " + drone.getManufacturerPhone());
+        System.out.println("Insurance phone: " + drone.getInsurancePhone());
+    }
+
     public static void main(String[] args) throws Exception {
         Scanner scan = new Scanner(System.in);
         System.out.println("Welcome to ___ Rentals!");
@@ -187,7 +226,7 @@ public class App {
         boolean keepGoing = true;
         int menuSelection;
         while(keepGoing) {
-            menuSelection = intPromptFromConsole("1: Rent equipment\n2: Return equipment\n3: Assign drone to delivery\n4: Assign drone to pickup\n5: Equipment menu\n6: Drone menu", scan);
+            menuSelection = intPromptFromConsole("1: Rent equipment\n2: Return equipment\n3: Assign drone to delivery\n4: Assign drone to pickup\n5: Equipment menu\n6: Drone menu\n7: Exit", scan);
             switch (menuSelection) {
                 case 1:
                     rentEquipment(customerId, scan);
