@@ -2,6 +2,7 @@ import java.util.Scanner;
 import entities.Drone;
 import entities.Equipment;
 import java.util.HashMap;
+import java.sql.*;
 
 public class App {
 
@@ -34,45 +35,45 @@ public class App {
 
         if(accountBool) {
             email = stringPromptFromConsole("Email: ", scan);
-            //TODO: Check database for valid email and handle logic
+            //Future: Check database for valid email and handle logic
         } else {
             email = stringPromptFromConsole("Email: ", scan);
             String firstName = stringPromptFromConsole("First name: ", scan);
             String lastName = stringPromptFromConsole("Last name: ", scan);
             String address = stringPromptFromConsole("Address: ", scan);
             String phone = stringPromptFromConsole("Phone: ", scan);
-            //TODO: Add user to database with fields
-            //TODO: Will we allow users to create their own accounts? Or will this add extra work for ourselves?
+            //Future: Add user to database with fields
+            //Future: Will we allow users to create their own accounts? Or will this add extra work for ourselves?
         }
 
         return email;
     }
 
     // Rent equipment menu
-    public static void rentEquipment(String customerId, Scanner scan) {
+    public static void rentEquipment(String customerId, Scanner scan, Connection conn) {
         String checkout = stringPromptFromConsole("Check out date (MM/DD/YYYY): ", scan);
         String dueDate = stringPromptFromConsole("Due date (MM/DD/YYYY): ", scan);
         String rentalFees = stringPromptFromConsole("Rental fees: ", scan);
         String serialNumber = stringPromptFromConsole("Equipment serial number: ", scan);
-        // TODO: Check for valid serialNumber and add to rentals in database for customer
+        MenuOptionsSQL.rentEquipment(customerId, checkout, dueDate, rentalFees, serialNumber, conn);
         System.out.println("Equipment rented successfully");
     }
 
-    public static void returnEquipment(String customerId, Scanner scan) {
+    public static void returnEquipment(String customerId, Scanner scan, Connection conn) {
         String returnDate = stringPromptFromConsole("Return date (MM/DD/YYYY): ", scan);
-        // TODO: Update rentals entry in database
+        MenuOptionsSQL.returnEquipment(customerId, returnDate, conn);
         System.out.println("Equipment returned successfully");
     }
 
-    public static void assignDroneToDelivery(String customerId, Scanner scan) {
+    public static void assignDroneToDelivery(String customerId, Scanner scan, Connection conn) {
         String droneId = stringPromptFromConsole("Drone Serial Number: ", scan);
-        // TODO: Check for valid droneId and assign to rental in database for customer
+        MenuOptionsSQL.assignDroneToDelivery(customerId, droneId, conn);
         System.out.println("Drone assigned to delivery successfully");
     }
 
-    public static void assignDroneToPickup(String customerId, Scanner scan) {
+    public static void assignDroneToPickup(String customerId, Scanner scan, Connection conn) {
         String droneId = stringPromptFromConsole("Drone Serial Number: ", scan);
-        // TODO: What do we do with this? There is nothing in the schema corresponding to this
+        MenuOptionsSQL.assignDroneToPickup(customerId, droneId, conn);
         System.out.println("Drone assigned to pickup successfully");
     }
 
@@ -145,27 +146,27 @@ public class App {
         System.out.println("Insurance phone: " + equipment.getInsurancePhone());
     }
 
-    public static void droneMenu(Scanner scan) {
+    public static void droneMenu(Scanner scan,  Connection conn) {
         int menuSelection = intPromptFromConsole("1: Add drone\n2: Remove drone\n3: List drones\n4: Search drones", scan);
         switch (menuSelection) {
             case 1:
-                addDrone(scan);
+                addDrone(scan, conn);
                 break;
             case 2:
-                removeDrone(scan);
+                removeDrone(scan, conn);
                 break;
             case 3:
-                listDrones();
+                listDrones(conn);
                 break;
             case 4:
-                searchDrones(scan);
+                searchDrones(scan, conn);
                 break;
             default:
                 break;
         }
     }
 
-    public static void addDrone(Scanner scan) {
+    public static void addDrone(Scanner scan, Connection conn) {
         String serialNumber = stringPromptFromConsole("Serial number: ", scan);
         String name = stringPromptFromConsole("Name: ", scan);
         String model = stringPromptFromConsole("Model: ", scan);
@@ -182,20 +183,20 @@ public class App {
         System.out.println("Drone added successfully");
     }
 
-    public static void removeDrone(Scanner scan) {
+    public static void removeDrone(Scanner scan, Connection conn) {
         String serialNumber = stringPromptFromConsole("Serial number: ", scan);
 
         droneRepository.remove(serialNumber);
         System.out.println("Drone removed successfully");
     }
 
-    public static void listDrones() {
+    public static void listDrones(Connection conn) {
         for (Drone drone : droneRepository.values()) {
             System.out.println(drone.getSerialNumber() + ": " + drone.getName());
         }
     }
 
-    public static void searchDrones(Scanner scan) {
+    public static void searchDrones(Scanner scan, Connection conn) {
         String serialNumber = stringPromptFromConsole("Serial number: ", scan);
         Drone drone = droneRepository.get(serialNumber);
         System.out.println("Name: " + drone.getName());
@@ -208,58 +209,77 @@ public class App {
         System.out.println("Manufacturer phone: " + drone.getManufacturerPhone());
     }
 
-    public static void reportMenu(Scanner scan) {
+    public static void reportMenu(Scanner scan, Connection conn) {
         int menuSelection = intPromptFromConsole("1: Renting checkouts. Find the total number of equipment items rented by a single member patron\n2: Popular item. Find the most popular item\n3: Popular Manufacturer. Find the most frequent equipment manufacturer in the database\n4: Popular Drone. Find the most used drone in the database\n5: Items checked out. Find the member who has rented out the most items and the total number of items they have rented out\n6: Equipment by Type of Equipment. Find the description (name) of equipment by type released before YEAR", scan);
     
         switch (menuSelection) {
             case 1:
-                rentingCheckouts(scan);
+                rentingCheckouts(scan, conn);
                 break;
             case 2:
-                popularItem(scan);
+                popularItem(scan, conn);
                 break;
             case 3:
-                popularManufacturer(scan);
+                popularManufacturer(scan, conn);
                 break;
             case 4:
-                popularDrone(scan);
+                popularDrone(scan, conn);
                 break;
             case 5:
-                itemsCheckedOut(scan);
+                itemsCheckedOut(scan, conn);
                 break;
             case 6:
-                equipmentByType(scan);
+                equipmentByType(scan, conn);
                 break;
             default:
                 break;
         }
     }
 
-    public static void rentingCheckouts(Scanner scan) {
-        
+    public static void rentingCheckouts(Scanner scan, Connection conn) {
+        ResultSet rs = ReportsSQL.rentingCheckouts(conn);
+        // TODO: Print out the results
     }
 
-    public static void popularItem(Scanner scan) {
-        
+    public static void popularItem(Scanner scan, Connection conn) {
+        ResultSet rs = ReportsSQL.popularItem(conn);
+        // TODO: Print out the results
     }
 
-    public static void popularManufacturer(Scanner scan) {
-        
+    public static void popularManufacturer(Scanner scan, Connection conn) {
+        ResultSet rs = ReportsSQL.popularManufacturer(conn);
+        // TODO: Print out the results
     }
 
-    public static void popularDrone(Scanner scan) {
-        
+    public static void popularDrone(Scanner scan, Connection conn) {
+        ResultSet rs = ReportsSQL.popularDrone(conn);
+        // TODO: Print out the results
     }
 
-    public static void itemsCheckedOut(Scanner scan) {
-        
+    public static void itemsCheckedOut(Scanner scan, Connection conn) {
+        ResultSet rs = ReportsSQL.itemsCheckedOut(conn);
+        // TODO: Print out the results
     }
 
-    public static void equipmentByType(Scanner scan) {
-        
+    public static void equipmentByType(Scanner scan, Connection conn) {
+        ResultSet rs = ReportsSQL.equipmentByType(conn);
+        // TODO: Print out the results
     }
 
     public static void main(String[] args) throws Exception {
+        final String JDBC_DRIVER = "UPDATE";
+        final String DB_URL = "UPDATE";
+        final String USER = "UPDATE";
+        final String PASS = "UPDATE";
+
+        Connection conn = null;
+        try {
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
         Scanner scan = new Scanner(System.in);
         System.out.println("Welcome to ___ Rentals!");
 
@@ -272,25 +292,25 @@ public class App {
             menuSelection = intPromptFromConsole("1: Rent equipment\n2: Return equipment\n3: Assign drone to delivery\n4: Assign drone to pickup\n5: Equipment menu\n6: Drone menu\n7: Report Menu\n8: Exit", scan);
             switch (menuSelection) {
                 case 1:
-                    rentEquipment(customerId, scan);
+                    rentEquipment(customerId, scan, conn);
                     break;
                 case 2:
-                    returnEquipment(customerId, scan);
+                    returnEquipment(customerId, scan, conn);
                     break;
                 case 3: 
-                    assignDroneToDelivery(customerId, scan);
+                    assignDroneToDelivery(customerId, scan, conn);
                     break;
                 case 4:
-                    assignDroneToPickup(customerId, scan);
+                    assignDroneToPickup(customerId, scan, conn);
                     break;
                 case 5:
                     equipmentMenu(scan);
                     break;
                 case 6:
-                    droneMenu(scan);
+                    droneMenu(scan, conn);
                     break;
                 case 7:
-                    reportMenu(scan);
+                    reportMenu(scan, conn);
                     break;
                 default:
                     keepGoing = false;
