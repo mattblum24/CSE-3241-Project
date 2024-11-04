@@ -169,18 +169,14 @@ public class App {
         String serialNumber = stringPromptFromConsole("Serial number: ", scan);
         String name = stringPromptFromConsole("Name: ", scan);
         String model = stringPromptFromConsole("Model: ", scan);
-        String status = stringPromptFromConsole("Status: ", scan);
+        int status = intPromptFromConsole("Status: ", scan);
         String year = stringPromptFromConsole("Year: ", scan);
-        String weight = stringPromptFromConsole("Weight: ", scan);
-        String capacity = stringPromptFromConsole("Capacity: ", scan);
-        String distanceAutonomy = stringPromptFromConsole("Distance autonomy: ", scan);
-        String maxSpeed = stringPromptFromConsole("Max speed: ", scan);
         String warrantyExpiration = stringPromptFromConsole("Warranty expiration: ", scan);
+        int availability = intPromptFromConsole("Availability: ", scan);
         String warehousePhone = stringPromptFromConsole("Warehouse phone: ", scan);
         String manufacturerPhone = stringPromptFromConsole("Manufacturer phone: ", scan);
-        String insurancePhone = stringPromptFromConsole("Insurance phone: ", scan);
 
-        Drone drone = new Drone(serialNumber, name, model, status, year, weight, capacity, distanceAutonomy, maxSpeed, warrantyExpiration, warehousePhone, manufacturerPhone, insurancePhone);
+        Drone drone = new Drone(serialNumber, name, model, status, year, warrantyExpiration, availability, warehousePhone, manufacturerPhone);
 
         droneRepository.put(serialNumber, drone);
         System.out.println("Drone added successfully");
@@ -204,16 +200,63 @@ public class App {
         Drone drone = droneRepository.get(serialNumber);
         System.out.println("Name: " + drone.getName());
         System.out.println("Model: " + drone.getModel());
-        System.out.println("Status: " + drone.getStatus());
+        System.out.println("Status: " + Integer.toString(drone.getStatus()));
         System.out.println("Year: " + drone.getYear());
-        System.out.println("Weight: " + drone.getWeight());
-        System.out.println("Capacity: " + drone.getCapacity());
-        System.out.println("Distance autonomy: " + drone.getDistanceAutonomy());
-        System.out.println("Max speed: " + drone.getMaxSpeed());
         System.out.println("Warranty expiration: " + drone.getWarrantyExpiration());
+        System.out.println("Availability: " + Integer.toString(drone.getAvailability()));
         System.out.println("Warehouse phone: " + drone.getWarehousePhone());
         System.out.println("Manufacturer phone: " + drone.getManufacturerPhone());
-        System.out.println("Insurance phone: " + drone.getInsurancePhone());
+    }
+
+    public static void reportMenu(Scanner scan) {
+        int menuSelection = intPromptFromConsole("1: Renting checkouts. Find the total number of equipment items rented by a single member patron\n2: Popular item. Find the most popular item\n3: Popular Manufacturer. Find the most frequent equipment manufacturer in the database\n4: Popular Drone. Find the most used drone in the database\n5: Items checked out. Find the member who has rented out the most items and the total number of items they have rented out\n6: Equipment by Type of Equipment. Find the description (name) of equipment by type released before YEAR", scan);
+    
+        switch (menuSelection) {
+            case 1:
+                rentingCheckouts(scan);
+                break;
+            case 2:
+                popularItem(scan);
+                break;
+            case 3:
+                popularManufacturer(scan);
+                break;
+            case 4:
+                popularDrone(scan);
+                break;
+            case 5:
+                itemsCheckedOut(scan);
+                break;
+            case 6:
+                equipmentByType(scan);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public static void rentingCheckouts(Scanner scan) {
+        
+    }
+
+    public static void popularItem(Scanner scan) {
+        
+    }
+
+    public static void popularManufacturer(Scanner scan) {
+        
+    }
+
+    public static void popularDrone(Scanner scan) {
+        
+    }
+
+    public static void itemsCheckedOut(Scanner scan) {
+        
+    }
+
+    public static void equipmentByType(Scanner scan) {
+        
     }
 
     public static void main(String[] args) throws Exception {
@@ -226,7 +269,7 @@ public class App {
         boolean keepGoing = true;
         int menuSelection;
         while(keepGoing) {
-            menuSelection = intPromptFromConsole("1: Rent equipment\n2: Return equipment\n3: Assign drone to delivery\n4: Assign drone to pickup\n5: Equipment menu\n6: Drone menu\n7: Exit", scan);
+            menuSelection = intPromptFromConsole("1: Rent equipment\n2: Return equipment\n3: Assign drone to delivery\n4: Assign drone to pickup\n5: Equipment menu\n6: Drone menu\n7: Report Menu\n8: Exit", scan);
             switch (menuSelection) {
                 case 1:
                     rentEquipment(customerId, scan);
@@ -245,6 +288,9 @@ public class App {
                     break;
                 case 6:
                     droneMenu(scan);
+                    break;
+                case 7:
+                    reportMenu(scan);
                     break;
                 default:
                     keepGoing = false;

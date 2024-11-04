@@ -8,40 +8,28 @@ public class Drone {
 
     String model;
 
-    String status;
+    int status;
 
     String year;
 
-    String weight;
-
-    String capacity;
-
-    String distanceAutonomy;
-
-    String maxSpeed;
-
     String warrantyExpiration;
+
+    int availability;
 
     String warehousePhone;
 
     String manufacturerPhone;
     
-    String insurancePhone;
-
-    public Drone(String name, String model, String serialNumber, String status, String year, String weight, String capacity, String distanceAutonomy, String maxSpeed, String warrantyExpiration, String warehousePhone, String manufacturerPhone, String insurancePhone) {
+    public Drone(String name, String model, String serialNumber, int status, String year, String warrantyExpiration, int availability, String warehousePhone, String manufacturerPhone) {
         this.name = name;
         this.model = model;
         this.serialNumber = serialNumber;
         this.status = status;
         this.year = year;
-        this.weight = weight;
-        this.capacity = capacity;
-        this.distanceAutonomy = distanceAutonomy;
-        this.maxSpeed = maxSpeed;
         this.warrantyExpiration = warrantyExpiration;
         this.warehousePhone = warehousePhone;
         this.manufacturerPhone = manufacturerPhone;
-        this.insurancePhone = insurancePhone;
+        this.availability = availability;
     }
 
     // Name
@@ -71,15 +59,6 @@ public class Drone {
         this.serialNumber = serialNumber;
     }
 
-    // Status
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     // Year
     public String getYear() {
         return year;
@@ -87,42 +66,6 @@ public class Drone {
 
     public void setYear(String year) {
         this.year = year;
-    }
-
-    // Weight
-    public String getWeight() {
-        return weight;
-    }
-
-    public void setWeight(String weight) {
-        this.weight = weight;
-    }
-
-    // Capacity
-    public String getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(String capacity) {
-        this.capacity = capacity;
-    }
-
-    // Distance Autonomy
-    public String getDistanceAutonomy() {
-        return distanceAutonomy;
-    }
-
-    public void setDistanceAutonomy(String distanceAutonomy) {
-        this.distanceAutonomy = distanceAutonomy;
-    }
-
-    // Max Speed
-    public String getMaxSpeed() {
-        return maxSpeed;
-    }
-
-    public void setMaxSpeed(String maxSpeed) {
-        this.maxSpeed = maxSpeed;
     }
 
     // Warranty Expiration
@@ -152,12 +95,21 @@ public class Drone {
         this.manufacturerPhone = manufacturerPhone;
     }
 
-    // Insurance Phone
-    public String getInsurancePhone() {
-        return insurancePhone;
+    // Availability
+    public int getAvailability() {
+        return availability;
     }
 
-    public void setInsurancePhone(String insurancePhone) {
-        this.insurancePhone = insurancePhone;
+    public void setAvailability(int availability) {
+        this.availability = availability;
+    }
+
+    // Status
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }
