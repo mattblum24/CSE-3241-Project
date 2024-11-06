@@ -1,3 +1,4 @@
+package sql;
 import java.sql.Connection;
 
 public class MenuOptionsSQL {
@@ -17,6 +18,5 @@ public class MenuOptionsSQL {
     public static void assignDroneToPickup(String customerId, String droneId, Connection conn) {
         // TODO: Enter SQL Query
     }
-
 
 }
