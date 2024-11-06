@@ -1,8 +1,8 @@
 package options;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.util.Scanner;
+
+import program.App;
 
 import tools.FromConsole;
 

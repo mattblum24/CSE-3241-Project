@@ -3,6 +3,8 @@ package options;
 import java.util.Scanner;
 
 import tools.FromConsole;
+import program.App;
+
 
 public class FunctionOptions {
 
