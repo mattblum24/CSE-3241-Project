@@ -1,35 +1,32 @@
 package options;
 
-import java.sql.Connection;
 import java.util.Scanner;
 
-import entities.Drone;
-import sql.DroneSQL;
 import tools.FromConsole;
 
 public class DroneMenu {
 
-    public static void droneMenu(Scanner scan,  Connection conn) {
+    public static void droneMenu(Scanner scan) {
         int menuSelection = FromConsole.intPrompt("1: Add drone\n2: Remove drone\n3: List drones\n4: Search drones", scan);
         switch (menuSelection) {
             case 1:
-                addDrone(scan, conn);
+                addDrone(scan);
                 break;
             case 2:
-                removeDrone(scan, conn);
+                removeDrone(scan);
                 break;
             case 3:
-                listDrones(conn);
+                listDrones();
                 break;
             case 4:
-                searchDrones(scan, conn);
+                searchDrones(scan);
                 break;
             default:
                 break;
         }
     }
 
-    public static void addDrone(Scanner scan, Connection conn) {
+    public static void addDrone(Scanner scan) {
         String serialNumber = FromConsole.stringPrompt("Serial number: ", scan);
         String name = FromConsole.stringPrompt("Name: ", scan);
         String model = FromConsole.stringPrompt("Model: ", scan);
@@ -40,35 +37,27 @@ public class DroneMenu {
         String warehousePhone = FromConsole.stringPrompt("Warehouse phone: ", scan);
         String manufacturerPhone = FromConsole.stringPrompt("Manufacturer phone: ", scan);
 
-        Drone drone = new Drone(serialNumber, name, model, status, year, warrantyExpiration, availability, warehousePhone, manufacturerPhone);
+        // TODO Create PreparedStatement and call SQLTools to query database
 
-        DroneSQL.addDrone(conn, drone);
         System.out.println("Drone added successfully");
     }
 
-    public static void removeDrone(Scanner scan, Connection conn) {
+    public static void removeDrone(Scanner scan) {
         String serialNumber = FromConsole.stringPrompt("Serial number: ", scan);
 
-        DroneSQL.removeDrone(conn, serialNumber);
+        // TODO Create PreparedStatement and call SQLTools to query database
+        
         System.out.println("Drone removed successfully");
     }
 
-    public static void listDrones(Connection conn) {
-        // TODO: Call DroneSQL and print out the results
+    public static void listDrones() {
+        // TODO Create PreparedStatement and call SQLTools to query database
     }
 
-    public static void searchDrones(Scanner scan, Connection conn) {
+    public static void searchDrones(Scanner scan) {
         String serialNumber = FromConsole.stringPrompt("Serial number: ", scan);
-        // TODO: Call DroneSQL and print out the results
-        // Drone drone = droneRepository.get(serialNumber);
-        // System.out.println("Name: " + drone.getName());
-        // System.out.println("Model: " + drone.getModel());
-        // System.out.println("Status: " + Integer.toString(drone.getStatus()));
-        // System.out.println("Year: " + drone.getYear());
-        // System.out.println("Warranty expiration: " + drone.getWarrantyExpiration());
-        // System.out.println("Availability: " + Integer.toString(drone.getAvailability()));
-        // System.out.println("Warehouse phone: " + drone.getWarehousePhone());
-        // System.out.println("Manufacturer phone: " + drone.getManufacturerPhone());
+        // TODO Create PreparedStatement and call SQLTools to query database
+
     }
 
 }

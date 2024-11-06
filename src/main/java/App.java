@@ -22,25 +22,9 @@ public class App {
     }
 
     // Runs the login menu
-    public static String customerLoginOrSignup(Scanner scan) {
-        boolean accountBool = FromConsole.yesOrNo("Do you have an account? (yes or no)", scan);
-
-        String email;
-
-        if(accountBool) {
-            email = FromConsole.stringPrompt("Email: ", scan);
-            //Future: Check database for valid email and handle logic
-        } else {
-            email = FromConsole.stringPrompt("Email: ", scan);
-            String firstName = FromConsole.stringPrompt("First name: ", scan);
-            String lastName = FromConsole.stringPrompt("Last name: ", scan);
-            String address = FromConsole.stringPrompt("Address: ", scan);
-            String phone = FromConsole.stringPrompt("Phone: ", scan);
-            //Future: Add user to database with fields
-            //Future: Will we allow users to create their own accounts? Or will this add extra work for ourselves?
-        }
-
-        return email;
+    public static String customerIDSpecification(Scanner scan) {
+        String customerId = FromConsole.stringPrompt("Enter customer ID: ", scan);
+        return customerId;
     }
 
     public static void main(String[] args) throws Exception {
@@ -49,8 +33,7 @@ public class App {
         Scanner scan = new Scanner(System.in);
         System.out.println("Welcome to ___ Rentals!");
 
-        String customerEmail = customerLoginOrSignup(scan);
-        String customerId = ""; //Future: Get customer ID from database
+        String customerId = customerIDSpecification(scan);
 
         boolean keepGoing = true;
         int menuSelection;
@@ -58,25 +41,25 @@ public class App {
             menuSelection = FromConsole.intPrompt("1: Rent equipment\n2: Return equipment\n3: Assign drone to delivery\n4: Assign drone to pickup\n5: Equipment menu\n6: Drone menu\n7: Report Menu\n8: Exit", scan);
             switch (menuSelection) {
                 case 1:
-                    FunctionOptions.rentEquipment(customerId, scan, conn);
+                    FunctionOptions.rentEquipment(customerId, scan);
                     break;
                 case 2:
-                    FunctionOptions.returnEquipment(customerId, scan, conn);
+                    FunctionOptions.returnEquipment(customerId, scan);
                     break;
                 case 3: 
-                    FunctionOptions.assignDroneToDelivery(customerId, scan, conn);
+                    FunctionOptions.assignDroneToDelivery(customerId, scan);
                     break;
                 case 4:
-                    FunctionOptions.assignDroneToPickup(customerId, scan, conn);
+                    FunctionOptions.assignDroneToPickup(customerId, scan);
                     break;
                 case 5:
                     EquipmentMenu.equipmentMenu(scan);
                     break;
                 case 6:
-                    DroneMenu.droneMenu(scan, conn);
+                    DroneMenu.droneMenu(scan);
                     break;
                 case 7:
-                    ReportMenu.reportMenu(scan, conn);
+                    ReportMenu.reportMenu(scan);
                     break;
                 default:
                     keepGoing = false;
@@ -86,5 +69,6 @@ public class App {
 
         System.out.println("Thank you for visiting ___ Rentals! Hope to see you again soon!");
         scan.close();
+        conn.close();
     }
 }
