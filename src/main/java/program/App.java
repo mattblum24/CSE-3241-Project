@@ -1,3 +1,5 @@
+package program;
+
 import java.util.Scanner;
 import tools.FromConsole;
 
@@ -6,6 +8,8 @@ import options.FunctionOptions;
 import options.EquipmentMenu;
 import options.DroneMenu;
 import options.ReportMenu;
+
+
 
 public class App {
 
