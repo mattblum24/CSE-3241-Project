@@ -36,6 +36,24 @@ public class SQLTools {
     			System.out.print("\n");
         	}
         	rs.close();
+            sql.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Executes a SQL statement that does not return rows.
+     * 
+     * @param conn a connection object
+     * @param sql a SQL statement that does not return rows:
+     * 		this query is written with the PrepareStatement class, typically 
+     * 		used for dynamic SQL INSERT, UPDATE, DELETE statements.
+     */
+    public static void sqlUpdate(Connection conn, PreparedStatement sql){
+        try {
+            sql.executeUpdate();
+            sql.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

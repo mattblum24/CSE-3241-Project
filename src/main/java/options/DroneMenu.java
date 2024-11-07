@@ -61,11 +61,7 @@ public class DroneMenu {
             System.out.println(e.getMessage());
         }
 
-        try {
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+        SQLTools.sqlUpdate(App.conn, ps);
 
         System.out.println("Drone added successfully");
     }
@@ -82,11 +78,7 @@ public class DroneMenu {
             System.out.println(e.getMessage());
         }
 
-        try {
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+        SQLTools.sqlUpdate(App.conn, ps);
         
         System.out.println("Drone removed successfully");
     }
