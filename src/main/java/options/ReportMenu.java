@@ -59,7 +59,19 @@ public class ReportMenu {
     }
 
     public static void popularItem(Scanner scan) {
-        // TODO Create PreparedStatement and call SQLTools to query database
+        try {
+
+            String sql = "SELECT serial_number, model, count(check_out) " + 
+                            "FROM equipment JOIN rental_order ON equipment.serial_number = rental_order.equipment_serial_number " + 
+                            "GROUP BY serial_number " + 
+                            "ORDER BY count(check_out) DESC; ";
+            ps = App.conn.prepareStatement(sql);
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        SQLTools.sqlQuery(App.conn, ps);
     }
 
     public static void popularManufacturer(Scanner scan) {
@@ -117,6 +129,20 @@ public class ReportMenu {
     }
 
     public static void equipmentByType(Scanner scan) {
-        // TODO Create PreparedStatement and call SQLTools to query database
+        String year = FromConsole.stringPrompt("Enter year: ", scan);
+        try {
+
+            String sql = "SELECT Equipment.model, type  " +   
+                                "FROM Equipment  " +   
+                                "JOIN Equip_Model on Equip_Model.model = Equipment.model  " +   
+                                "WHERE Equipment.year > ? ;";
+            ps = App.conn.prepareStatement(sql);
+            ps.setString(1, year);
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        SQLTools.sqlQuery(App.conn, ps);
     }
 }
