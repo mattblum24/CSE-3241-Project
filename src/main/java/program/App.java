@@ -16,7 +16,7 @@ public class App {
     public static Connection conn = null;
 
     public static void initializeConnection() {
-        String url = "jdbc:sqlite:project.db";
+        String url = "jdbc:sqlite:project";
 
         try {
             conn = DriverManager.getConnection(url);
